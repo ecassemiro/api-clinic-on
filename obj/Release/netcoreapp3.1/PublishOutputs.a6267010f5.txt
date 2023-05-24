@@ -1,0 +1,8 @@
+E:\API-BOT-master\API-Clinica\obj\Release\netcoreapp3.1\PubTmp\Out\API-Clinica.exe
+E:\API-BOT-master\API-Clinica\obj\Release\netcoreapp3.1\PubTmp\Out\appsettings.Development.json
+E:\API-BOT-master\API-Clinica\obj\Release\netcoreapp3.1\PubTmp\Out\appsettings.json
+E:\API-BOT-master\API-Clinica\obj\Release\netcoreapp3.1\PubTmp\Out\API-Clinica.dll
+E:\API-BOT-master\API-Clinica\obj\Release\netcoreapp3.1\PubTmp\Out\API-Clinica.deps.json
+E:\API-BOT-master\API-Clinica\obj\Release\netcoreapp3.1\PubTmp\Out\API-Clinica.runtimeconfig.json
+E:\API-BOT-master\API-Clinica\obj\Release\netcoreapp3.1\PubTmp\Out\API-Clinica.pdb
+E:\API-BOT-master\API-Clinica\obj\Release\netcoreapp3.1\PubTmp\Out\Newtonsoft.Json.dll

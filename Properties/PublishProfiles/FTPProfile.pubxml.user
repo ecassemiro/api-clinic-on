@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Esse arquivo é usado pelo processo de publicação/pacote do seu projeto Web. É possível personalizar o comportamento deste processo
+ao editar este arquivo MSBuild. Para saber mais sobre isso, visite https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA+f6/TS6ef0Wd+EulKeui+AAAAAACAAAAAAAQZgAAAAEAACAAAADtdpseQwwpmhljUrp6jz5S3iSPDdwWOP4w0bwul9XTtgAAAAAOgAAAAAIAACAAAABE7vfjc4vEoLfrgxzNuNFn6uLp3e8rE9Z982+es9elkyAAAAAP55/JtpAmLWbhNtl7y+zcp7ML6zq7mooxG+VCcC12a0AAAABItGD111YejrlLID6kCVyU5Syuv6RU/BuN7cWVDRRWOikz7kLpUh0UY24r4/WymCUibbHRfC7UlFTaVvw9Z0Qx</EncryptedPassword>
+    <_PublishTargetUrl>ftp://155.254.244.28/www.botpoli.somee.com</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="API-Clinica.deps.json">
+      <publishTime>05/24/2023 12:24:25</publishTime>
+    </File>
+    <File Include="API-Clinica.dll">
+      <publishTime>05/24/2023 12:24:24</publishTime>
+    </File>
+    <File Include="API-Clinica.exe">
+      <publishTime>05/24/2023 12:24:24</publishTime>
+    </File>
+    <File Include="API-Clinica.pdb">
+      <publishTime>05/24/2023 12:24:24</publishTime>
+    </File>
+    <File Include="API-Clinica.runtimeconfig.json">
+      <publishTime>05/03/2023 17:51:04</publishTime>
+    </File>
+    <File Include="appsettings.Development.json">
+      <publishTime>01/25/2023 13:19:51</publishTime>
+    </File>
+    <File Include="appsettings.json">
+      <publishTime>01/25/2023 13:19:51</publishTime>
+    </File>
+    <File Include="Newtonsoft.Json.dll">
+      <publishTime>11/24/2022 02:10:26</publishTime>
+    </File>
+    <File Include="web.config">
+      <publishTime>05/24/2023 12:28:31</publishTime>
+    </File>
+  </ItemGroup>
+</Project>
