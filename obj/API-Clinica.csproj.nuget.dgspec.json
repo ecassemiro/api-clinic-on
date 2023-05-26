@@ -1,27 +1,32 @@
 {
   "format": 1,
   "restore": {
-    "E:\\API-BOT-master\\API-Clinica\\API-Clinica.csproj": {}
+    "C:\\Users\\julia.cassemiro\\OneDrive - Vaxxinova\\projects\\API-Clinica\\clinic-on\\API-Clinica.csproj": {}
   },
   "projects": {
-    "E:\\API-BOT-master\\API-Clinica\\API-Clinica.csproj": {
+    "C:\\Users\\julia.cassemiro\\OneDrive - Vaxxinova\\projects\\API-Clinica\\clinic-on\\API-Clinica.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\API-BOT-master\\API-Clinica\\API-Clinica.csproj",
+        "projectUniqueName": "C:\\Users\\julia.cassemiro\\OneDrive - Vaxxinova\\projects\\API-Clinica\\clinic-on\\API-Clinica.csproj",
         "projectName": "API-Clinica",
-        "projectPath": "E:\\API-BOT-master\\API-Clinica\\API-Clinica.csproj",
-        "packagesPath": "C:\\Users\\eduar\\.nuget\\packages\\",
-        "outputPath": "E:\\API-BOT-master\\API-Clinica\\obj\\",
+        "projectPath": "C:\\Users\\julia.cassemiro\\OneDrive - Vaxxinova\\projects\\API-Clinica\\clinic-on\\API-Clinica.csproj",
+        "packagesPath": "C:\\Users\\julia.cassemiro\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\julia.cassemiro\\OneDrive - Vaxxinova\\projects\\API-Clinica\\clinic-on\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\eduar\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\julia.cassemiro\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
         ],
         "sources": {
-          "https://api.nuget.org/v3/index.json": {},
-          "https://nuget.telerik.com/v3/index.json": {}
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netcoreapp3.1": {
@@ -39,9 +44,49 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Abstractions": {
+              "target": "Package",
+              "version": "[3.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Analyzers": {
+              "target": "Package",
+              "version": "[3.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Relational": {
+              "target": "Package",
+              "version": "[3.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[3.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.0.0, )"
+            },
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.2, )"
+            },
+            "System.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.8.5, )"
+            },
+            "System.DirectoryServices": {
+              "target": "Package",
+              "version": "[7.0.1, )"
             }
           },
           "imports": [
@@ -54,12 +99,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.NETCore.App.Host.win-x64",
-              "version": "[3.1.25, 3.1.25]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -68,7 +107,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.408\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.411\\RuntimeIdentifierGraph.json"
         }
       }
     }

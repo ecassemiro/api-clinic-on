@@ -4,6 +4,7 @@
 namespace API_Clinica.Model
 {
     // R E Q U E S T    C L A S
+
     public class Credentials_Request
     {
 
@@ -16,7 +17,9 @@ namespace API_Clinica.Model
         public string Text { get; set; }
         public Contact Contact { get; set; }
         [JsonProperty("data")]
-        public string Data { get; set; }
+        public Data Data { get; set; }
+
+        public string origin { get; set; }
 
 
     }
@@ -50,5 +53,14 @@ namespace API_Clinica.Model
         public string Email { get; set; }
 
     }
-    
+
+    public class Data
+    {
+        [JsonProperty("example")]
+        public string example { get; set; }
+        public string id_especialidade { get; set; }
+        public string id_medica { get; set; }
+
+    }
+
 }

@@ -10,6 +10,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using API_Clinica.Models;
+
 
 namespace API_Clinica
 {
@@ -26,6 +29,11 @@ namespace API_Clinica
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            //services.AddDbContext<ADSCentralContext>(options => options.UseSqlServer(Configuration.GetConnectionString("PEC")));
+            services.AddDbContext<ADSCentralContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ClinicaContext")));
+            services.AddScoped<ADSCentralContextProcedures>();
+            services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

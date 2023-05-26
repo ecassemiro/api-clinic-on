@@ -1,4 +1,5 @@
-﻿using API_Clinica.Model;
+﻿using API_Clinica.Models;
+using API_Clinica.Model;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
@@ -16,6 +17,16 @@ namespace PEC.Controllers
     [ApiController]
     public class BotController : ControllerBase
     {
+        private readonly ADSCentralContext _context;
+        private readonly ADSCentralContextProcedures _contextProcedures;
+
+        public BotController(ADSCentralContext context, ADSCentralContextProcedures contextProcedures)
+        {
+            _context = context;
+            _contextProcedures = contextProcedures;
+        }
+
+
         [HttpGet]
         public object Get()
         {
@@ -39,6 +50,10 @@ namespace PEC.Controllers
         public class Data
         {
             public string example { get; set; }
+            public string id_especialidade { get; set; }
+            public string id_medico { get; set; }
+            public string nome { get; set; }
+
         }
         public class Items
         {
@@ -67,73 +82,102 @@ namespace PEC.Controllers
             var CPF = Fields.Cpf;
             var celular = Fields.Celular;
 
-            // VOCES VAO COLOCAR OS TRATAMENTOS
-            //SQL RECEBE ALGUMA VARIAVEL
-            //FAZ UM WHERE COM A VARIAVEL
-            //O QUE RETORNAR DESSE WHERE
-            //VCS PODEM COLOCAR NA RESPONSE.
 
-          
+            //_context.Especialidade.ToList();
+            var especialidades = _context.VwEspecialidadeConvenioChat.ToList().Where(e => e.IdConvenio == 90);
+
+
+            var items = new List<dynamic>();
+
+
+            foreach (var especialidade in especialidades)
+            {
+                var item = new
+                {
+                    number = especialidade.Codigo,
+                    text = especialidade.NmEspecialidade, // supondo que o nome da especialidade está na propriedade "NmEspecialidade"
+                    callback = new Callback()
+                    {
+                        endpoint = "https://vaxxinova.ind.br/centralcadastro/api/bot/medico",
+                        data = new Data()
+                        {
+                            example = "example: " + especialidade.Especialidade,
+                            id_especialidade = "example: " + especialidade.IdEspecialidade,
+                            id_medico = "example: " + especialidade.Codigo,
+                            nome = "example: " + especialidade.NmEspecialidade,
+
+                        },
+                    },
+                };
+
+                items.Add(item);
+            }
 
             var body = new
             {
-
                 type = "MENU",
-                text = "My first menu integration.",
+                text = "Para selecionar uma especialidade",
                 attachments = new[]
                 {
                     new
-                     {
-                    position = "BEFORE",
-                    type = "IMAGE",
-                    name = "image.png",
-                    url = "https://yourdomain.com/cdn/logo.png"
-                }
+                    {
+                        position = "BEFORE",
+                        type = "IMAGE",
+                        name = "image.png",
+                        url = "https://yourdomain.com/cdn/logo.png"
+                    }
                 },
+                items = items.ToArray()
+            };
 
-                items = new[]
-                       {
-                             new
-                             {
-                                number = 1,
-                                 text = "CARDIO",
-                                 callback = new Callback()
-                                 {
-                                     endpoint = "https://yourdomain.com/api/menu_1",
-                                     data = new Data()
-                                     {
-                                         example = "Especialidade Cardio (text, text text..)",
-                                     },
-                                 },
-                             },
-                             new
-                             {
-                                 number = 2,
-                                 text = " CLINICO GERAL",
-                                 callback = new Callback()
-                                 {
-                                     endpoint = "https://yourdomain.com/api/menu_1",
-                                     data = new Data()
-                                     {
-                                         example = "Especialidade CLINICO GERAL (text, text text..)",
-                                     },
-                                 },
-                             },
-                             new
-                             {
-                                 number = 3,
-                                 text = " DERMATO",
-                                 callback = new Callback()
-                                 {
-                                     endpoint = "https://yourdomain.com/api/menu_1",
-                                     data = new Data()
-                                     {
-                                         example = "Especialidade DERMATO (text, text text..)",
-                                     },
-                                 },
-                             },
-                         }
+            return new JsonResult(body);
+        }
 
+        [HttpPost("medico")]
+        public object Post7(Credentials_Request bot)
+        {
+            var id_especialidade = bot.Text;
+
+            //var especialidades = _context.Especialidade.Single(e => e.IdEspecialidade.ToString() == id_especialidade);
+            var medicos = _contextProcedures.usp_Medico_Espec_ConvenioChatAsync(90, int.Parse(id_especialidade)).Result;
+
+
+            var items = new List<dynamic>();
+            foreach (var medico in medicos)
+            {
+                var item = new
+                {
+                    number = medico.ID_Medico,
+                    text = medico.NM_Medico, // supondo que o nome da especialidade está na propriedade "NmEspecialidade"
+                    callback = new Callback()
+                    {
+                        endpoint = "https://vaxxinova.ind.br/centralcadastro/api/bot/horario",
+                        data = new Data()
+                        {
+                            id_medico = medico.ID_Medico.ToString(),
+                            id_especialidade = id_especialidade,
+                        },
+                    },
+                };
+
+                items.Add(item);
+            }
+
+            var body = new
+            {
+                type = "MENU",
+                text = "Para selecionar um médico",
+                attachments = new[]
+                {
+                    new
+                    {
+                        position = "BEFORE",
+                        type = "IMAGE",
+                        name = "image.png",
+                        url = "https://yourdomain.com/cdn/logo.png"
+                    }
+                },
+                items = items.ToArray()
             };
 
             return new JsonResult(body);
@@ -141,24 +185,58 @@ namespace PEC.Controllers
 
 
 
-        //retorno json assim oh
-        //[HttpPost("{Json}")]
-        //public object PostReturnJson()
-        //{
-        //    var payload = new Credentials_Request
-        //    {
-        //        Contact = new Contact
-        //        {
-        //            Name = "Agent Name",
-        //        },
-        //        Id = 23
-        //    };
+        [HttpPost("horario")]
+        public object horario(Credentials_Request bot)
+        {
+            var id_especialidade = bot.Data.id_especialidade;
+            //var id_medico = bot.Data.id_medico;
+            var id_medico = "4557";
+            var date = DateTime.Now;
 
-        //    var teste = payload;
-        //    return new JsonResult(teste);
 
-        //}
+            //var especialidades = _context.Especialidade.Single(e => e.IdEspecialidade.ToString() == id_especialidade);
+            var horarios = _contextProcedures.usp_Separar_Consulta_AgendaChatAsync(int.Parse(id_especialidade), int.Parse(id_medico), date, 90).Result;
+            //exec usp_Separar_Consulta_AgendaChat idespecialidade, idMedico, data,90
 
+            var items = new List<dynamic>();
+            foreach (var horario in horarios)
+            {
+                var item = new
+                {
+                    number = horario.Ordem,
+                    text = horario.DT_Consulta + "\n" + horario.HS_Consulta, // supondo que o nome da especialidade está na propriedade "NmEspecialidade"
+                    callback = new Callback()
+                    {
+                        endpoint = "https://vaxxinova.ind.br/pecapp/api/bot/horario",
+                        data = new Data()
+                        {
+                            example = horario.Nome,
+                        },
+                    },
+                };
+
+                items.Add(item);
+            }
+
+            var body = new
+            {
+                type = "MENU",
+                text = "Para selecionar um horário",
+                attachments = new[]
+                {
+                    new
+                    {
+                        position = "BEFORE",
+                        type = "IMAGE",
+                        name = "image.png",
+                        url = "https://yourdomain.com/cdn/logo.png"
+                    }
+                },
+                items = items.ToArray()
+            };
+
+            return new JsonResult(horarios);
+        }
 
     }
 }
